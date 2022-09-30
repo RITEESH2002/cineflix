@@ -4,6 +4,11 @@ import { makeStyles } from "@mui/styles"
 export default makeStyles((theme)=>({
  movie: {
   padding: '10px',
+  overflowY: 'scroll',
+    scrollBehavior: 'smooth',
+    '&::-webkit-scrollbar': {
+      display: 'none' ,
+    },
  },
  links: {
   alignItems: "center",

@@ -6,7 +6,11 @@ export default makeStyles((theme)=>({
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
-    overflow: 'auto',
+    overflowY: 'scroll',
+    scrollBehavior: 'smooth',
+    '&::-webkit-scrollbar': {
+      display: 'none' ,
+    },
     [theme.breakpoints.down('sm')]: {
       justifyContent: 'center',
     }
