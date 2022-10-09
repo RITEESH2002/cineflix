@@ -12,7 +12,7 @@ export default makeStyles((theme)=>({
   imageLink: {
     display: 'flex',
     justifyContent : 'center',
-    padding: '10% 0',
+    padding: '5%',
   },
   image: {
     width: '70%',

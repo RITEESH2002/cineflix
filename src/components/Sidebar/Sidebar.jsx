@@ -16,13 +16,22 @@ import { useGetGenresQuery } from "../../services/TMDB";
 import genreIcons from "../../assets/genres";
 import { useDispatch, useSelector } from "react-redux";
 import { selectGenreOrCategory } from "../../features/currentGenreOrCategory";
+import Lottie from "react-lottie";
+import animationData from "../../lottie/movies.json";
 
 const categories = [
   { label: "Popular", value: "popular" },
   { label: "Top Rated", value: "top_rated" },
   { label: "Upcoming", value: "upcoming" },
 ];
-
+const defaultOptions = {
+  loop: true,
+  autoplay: true,
+  animationData: animationData,
+  rendererSettings: {
+    preserveAspectRatio: "xMidYMid slice",
+  },
+};
 const blueLogo =
   "https://fontmeme.com/permalink/210930/8531c658a743debe1e1aa1a2fc82006e.png";
 const redLogo =
@@ -39,11 +48,12 @@ const Sidebar = ({ setMobileOpen }) => {
       <div className={classes.scroll}>
 
       <Link to="/" className={classes.imageLink}>
-        <img
+        {/* <img
           className={classes.image}
           src={theme.palette.mode === "light" ? blueLogo : redLogo}
           alt="Filmpire logo"
-        />
+        /> */}
+        <Lottie options={defaultOptions} height={100} width={120} />
       </Link>
       <Divider />
       <List>
