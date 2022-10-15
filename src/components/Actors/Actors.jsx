@@ -3,28 +3,18 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { useGetActorDetailsQuery, useGetMoviesByActorIdQuery } from '../../services/TMDB'
 import {
   Typography,
-  Modal,
   Button,
-  ButtonGroup,
   Grid,
   Box,
   CircularProgress,
-  useMediaQuery,
-  Rating,
 } from "@mui/material";
 import {
-  Movie as MovieIcon,
-  Theaters,
-  PlusOne,
-  Favorite,
-  FavoriteBorderOutlined,
-  Remove,
   ArrowBack,
-  Language,
 } from "@mui/icons-material";
 import { Link } from 'react-router-dom';
 import useStyles from './styles'
 import MovieList from '../MovieList/MovieList';
+import Pagination from '../Pagination/Pagination';
 
 const Actors = () => {
   const [page, setPage] = useState(1)
@@ -113,7 +103,7 @@ const Actors = () => {
           ? <MovieList movies={movieData} numberOfMovies={12}/>
           : <><br></br><Box>Sorry, Nothing Was Found.</Box></>}
       </Box>
-      
+      <Pagination currentPage= {page} setPage={setPage} totalPages={movieData.total_pages} />
     </Grid>
   )
 }

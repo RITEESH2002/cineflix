@@ -9,8 +9,8 @@ export default makeStyles((theme)=>({
     height: '70px',
   },
   content:{
+    width:'100%',
     flexGrow: '1',
     padding: '2em',
-    width:'100%',
   },
 }));
