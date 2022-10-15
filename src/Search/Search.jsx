@@ -14,6 +14,7 @@ const Search = () => {
   const dispatch = useDispatch();
   const handleKeyPress = (event) => {
     if(event.key === 'Enter') { 
+      console.log(query)
       dispatch(searchMovie(query));
       setQuery('');
     }
@@ -24,6 +25,7 @@ const Search = () => {
       <TextField
         onKeyPress={handleKeyPress}
         value={query}
+        placeholder="Search Movie Here..."
         onChange={(e)=> setQuery(e.target.value)}
         variant="standard"
         InputProps={{

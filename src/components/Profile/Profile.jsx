@@ -5,8 +5,12 @@ import Lottie from "react-lottie";
 import animationData from "../../lottie/user.json";
 import { Box, Typography, Button } from "@mui/material";
 import { ExitToApp } from "@mui/icons-material";
+import { useGetListQuery } from "../../services/TMDB";
+import RatedCards from "../RatedCards/RatedCards";
+import { useEffect } from "react";
 
 const Profile = () => {
+  
   const defaultOptions = {
     loop: true,
     autoplay: true,
@@ -19,12 +23,32 @@ const Profile = () => {
     localStorage.clear();
     window.location.href = "/";
   };
-  const favouriteMovies = []
+  
   const { user } = useSelector(userSelector);
   console.log(user);
+  
+  const { data: favoriteMovies, refetch: refetchFavorites } = useGetListQuery({
+    listName: "favorite/movies",
+    accountId: user.id,
+    sessionId: localStorage.getItem("session_id"),
+    page: 1,
+  });
+  const { data: watchlistMovies, refetch: refetchWatchListed } = useGetListQuery({
+    listName: "watchlist/movies",
+    accountId: user.id,
+    sessionId: localStorage.getItem("session_id"),
+    page: 1,
+  });
+  
+  useEffect(() => {
+
+    refetchFavorites();
+    refetchWatchListed();
+
+  }, [])  
+
   return (
     <>
-
     <Box
       display="flex"
       flexDirection="column"
@@ -38,14 +62,15 @@ const Profile = () => {
           variant="h6"
           fontFamily={"Helvetica Neue"}
           gutterBottom
+          fontWeight="bolder"
         >{`UserName : ${user.username}`}</Typography>
         <Typography
           variant="h6"
           fontFamily={"Helvetica Neue"}
           gutterBottom
+          fontWeight="bolder"
         >{`UserID : ${user.id}`}</Typography>
       </div>
-
       <Button
         variant="outlined"
         sx={{ width: 200, padding: 1, margin: 2 }}
@@ -56,15 +81,16 @@ const Profile = () => {
       </Button>
     </Box>
     <br></br>
-    {!favouriteMovies.length ?
-      ( 
-      
-      <Typography variant = "h5" fontFamily={"Helvetica Neue"}
+    {
+      (!favoriteMovies?.results?.length && !watchlistMovies?.results?.length) ? ( 
+      <Typography variant = "h5" fontFamily={"Helvetica Neue"} fontWeight="bolder"
       gutterBottom>
         Add Favourites or WatchList Some Movies !
-      </Typography>) : (
+      </Typography>
+      ) : (
         <Box>
-          FAVOURITE MOVIES
+          <RatedCards title="Favorite Movies" data={favoriteMovies}/>
+          <RatedCards title="Watchlist Movies" data={watchlistMovies}/>
         </Box>
       )
     }

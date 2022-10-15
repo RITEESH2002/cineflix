@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
 import {
   AppBar, IconButton, Toolbar, Drawer, Button, Avatar,useMediaQuery,
 } from "@mui/material";
@@ -17,6 +17,8 @@ import { fetchToken, createSessionId, moviesApi } from "../../utils";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { userSelector, setUser } from "../../features/auth";
+import { ColorModeContext } from "../../utils/ToggleColorMode";
+
 
 const NavBar = () => {
   const { isAuthenticated, user } = useSelector(userSelector)
@@ -26,6 +28,8 @@ const NavBar = () => {
   const theme = useTheme();
   const dispatch = useDispatch();
   
+  const colorMode = useContext(ColorModeContext);
+
   const token = localStorage.getItem('request_token')
   const sessionIdFromLocalStorage = localStorage.getItem('session_id')
   
@@ -59,7 +63,7 @@ const NavBar = () => {
             >
               <Menu />
             </IconButton>)}
-          <IconButton color="inherit" sx={{ ml: 1 }} onClick={() => {}}>
+          <IconButton color="inherit" sx={{ ml: 1 }} onClick={colorMode.toggleColorMode}>
             {theme.palette.mode === "dark" ? <Brightness7 /> : <Brightness4 />}
           </IconButton>
           {!isMobile && <Search />}
@@ -76,7 +80,7 @@ const NavBar = () => {
                 className={classes.linkButton}
                 onClick={() => {}}
               >
-                {!isMobile && <>MyMovies &nbsp; </>}
+                {!isMobile && <>My Movies &nbsp; </>}
                 <Avatar
                   style={{ width: 30, height: 30 }}
                   alt="Profile"
