@@ -105,11 +105,11 @@ const Sidebar = ({ setMobileOpen }) => {
           ))
         )}
       </List>
-      <Typography variant='h6' sx={{marginBottom:'16px',marginLeft:'16px', color:'gray',}}>
+{/*       <Typography variant='h6' sx={{marginBottom:'16px',marginLeft:'16px', color:'gray',}}>
             <a target="_blank" style={{textDecoration:'none', color:'gray', fontSize:'17px'}}>
               Copyright © RDPAI
             </a>
-      </Typography>
+      </Typography> */}
       </div>
     </>
   );
